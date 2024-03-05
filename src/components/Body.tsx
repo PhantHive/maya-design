@@ -18,7 +18,7 @@ const constellations: Constellation[] = [
             { x: 150, y: 220 },
             { x: 130, y: 270 },
         ],
-        image: '/Phearion-logo.png',
+        image: 'Phearion-logo.png',
     },
     {
         id: 1,
@@ -33,7 +33,7 @@ const constellations: Constellation[] = [
             { x: 70, y: 230 },
             { x: 220, y: 230 },
         ],
-        image: '/Xonic-logo.png',
+        image: 'Xonic-logo.png',
     },
     {
         id: 2,
@@ -52,7 +52,7 @@ const constellations: Constellation[] = [
             { x: 290, y: 200 },
             { x: 260, y: 290 },
         ],
-        image: '/BigBrain-logo.png',
+        image: 'BigBrain-logo.png',
     },
 ];
 
