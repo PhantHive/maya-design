@@ -142,7 +142,7 @@
 
 @media (max-width: 1200px) {
     .constellation {
-        top: calc(var(--vh, 1vh) * 50);
+        top: calc(var(--vh, 1vh) * 40);
         left: 50%;
         transform: translate(-50%, -50%);
     }
