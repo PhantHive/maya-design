@@ -9,9 +9,9 @@
 
 .background {
     position: relative;
-    top: 10vh;
+    top: calc(var(--vh, 1vh) * 10);
     width: 100vw;
-    height: 90vh;
+    height: calc(var(--vh, 1vh) * 90);
     // dark blue gradient circle with shadow
     background: radial-gradient(circle, #00063f, #000000);
     overflow: hidden;
@@ -127,7 +127,7 @@
 
 .swipe-indicator {
     position: absolute;
-    bottom: 5vh;
+    bottom: calc(var(--vh, 1vh) * 5);
     left: 50%;
     transform: translateX(-50%);
     color: #ffffff;
