@@ -1,0 +1,153 @@
+@keyframes moveStars {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+.background {
+    position: relative;
+    top: 10vh;
+    width: 100vw;
+    height: 90vh;
+    // dark blue gradient circle with shadow
+    background: radial-gradient(circle, #00063f, #000000);
+    overflow: hidden;
+}
+
+.moving-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.constellations {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.constellation {
+    position: absolute;
+    cursor: pointer;
+}
+
+.constellation.active .constellation-svg {
+    opacity: 0.2;
+}
+
+.constellation:hover .constellation-line {
+    stroke: #00d9f6;
+}
+
+.constellation-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.constellation-line {
+    position: absolute;
+    stroke: #ffffff;
+}
+
+.movingStars {
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 50%;
+    animation: moveStars 10s linear infinite;
+    opacity: 0.5;
+}
+
+.stars {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #00d9f6;
+    border-radius: 50%;
+    /* glow effect */
+    box-shadow: 0 0 10px #00d9f6;
+}
+
+.project-image {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10vw;
+}
+
+// make each letter grow in height and shrink then next letter grows like a wave using the span classes s,w,i,p,e
+@keyframes wave {
+    0% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.5);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.swipe-indicator span {
+    display: inline-block;
+    animation: wave 2s infinite;
+    animation-delay: 0.2s;
+}
+
+.swipe-indicator .s {
+    animation-delay: 0s;
+}
+
+.swipe-indicator .w {
+    animation-delay: 0.2s;
+}
+
+.swipe-indicator .i {
+    animation-delay: 0.4s;
+}
+
+.swipe-indicator .p {
+    animation-delay: 0.6s;
+}
+
+.swipe-indicator .e {
+    animation-delay: 0.8s;
+}
+
+
+
+.swipe-indicator {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.swipe-indicator span {
+    font-family: 'Roboto', sans-serif;
+}
+
+@media (max-width: 1200px) {
+    .constellation {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .project-image {
+        width: 50vw;
+    }
+}
