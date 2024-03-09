@@ -1,60 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Constellation } from '../typings/Constellation.tsx';
+import { constellations } from '../typings/Constellation.tsx';
 import useSwipeBehavior from '../effects/useSwipeBehavior.tsx';
-
-const constellations: Constellation[] = [
-    {
-        id: 0,
-        name: 'Phearion',
-        constellationSize: [
-            { x: 10, y: 10 },
-            { x: 300, y: 300 },
-        ],
-        stars: [
-            { x: 70, y: 100 },
-            { x: 120, y: 110 },
-            { x: 180, y: 15 },
-            { x: 250, y: 150 },
-            { x: 150, y: 220 },
-            { x: 130, y: 270 },
-        ],
-        image: 'Phearion-logo.png',
-    },
-    {
-        id: 1,
-        name: 'Xonic',
-        constellationSize: [
-            { x: 35, y: 50 },
-            { x: 300, y: 300 },
-        ],
-        stars: [
-            { x: 60, y: 45 },
-            { x: 220, y: 45 },
-            { x: 70, y: 230 },
-            { x: 220, y: 230 },
-        ],
-        image: 'Xonic-logo.png',
-    },
-    {
-        id: 2,
-        name: 'BigBrain',
-        constellationSize: [
-            { x: 70, y: 10 },
-            { x: 300, y: 300 },
-        ],
-        stars: [
-            { x: 30, y: 290 },
-            { x: 0, y: 200 },
-            { x: 10, y: 70 },
-            { x: 100, y: 10 },
-            { x: 190, y: 10 },
-            { x: 280, y: 70 },
-            { x: 290, y: 200 },
-            { x: 260, y: 290 },
-        ],
-        image: 'BigBrain-logo.png',
-    },
-];
 
 export const Body = () => {
     const [selectedConstellation, setSelectedConstellation] = useState<

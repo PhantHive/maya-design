@@ -1,6 +1,7 @@
 import './components/Body';
 import { Body } from './components/Body.tsx';
 import { Header } from './components/Header.tsx';
+import { Footer } from './components/Footer.tsx';
 import { useEffect } from 'react';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <div className="App">
                 <Header />
                 <Body />
+                <Footer />
             </div>
         </>
     );

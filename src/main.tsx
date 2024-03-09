@@ -4,6 +4,7 @@ import App from './App.tsx';
 import './styles/index.css';
 import './styles/body.scss';
 import './styles/header.scss';
+import './styles/footer.scss';
 
 const root = ReactDOM.createRoot(document.querySelector('#root') as Element);
 root.render(

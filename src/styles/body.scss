@@ -7,11 +7,18 @@
     }
 }
 
+.center-text {
+    position: absolute; // This will position the text relative to the .background div
+    opacity: 0.5; // Adjust this to the opacity you want
+    animation: blink 1s linear infinite;
+
+}
+
 .background {
     position: relative;
     top: calc(var(--vh, 1vh) * 10);
     width: 100vw;
-    height: calc(var(--vh, 1vh) * 90);
+    height: calc(var(--vh, 1vh) * 85);
     // dark blue gradient circle with shadow
     background: radial-gradient(circle, #00063f, #000000);
     overflow: hidden;
@@ -25,6 +32,8 @@
     height: 100%;
 }
 
+
+
 .constellations {
     top: 0;
     left: 0;
@@ -35,11 +44,16 @@
 .constellation {
     position: absolute;
     cursor: pointer;
+    width: 100%;
+    height: 100%;
+
+    img {
+        max-width: 70%;
+        max-height: 70%;
+        object-fit: contain;
+    }
 }
 
-.constellation.active .constellation-svg {
-    opacity: 0.2;
-}
 
 .constellation:hover .constellation-line {
     stroke: #00d9f6;
@@ -53,7 +67,7 @@
     height: 100%;
 }
 
-.constellation-line {
+.constellation-svg {
     position: absolute;
     stroke: #ffffff;
 }
