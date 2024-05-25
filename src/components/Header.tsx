@@ -1,7 +1,7 @@
 import { ReactTyped } from 'react-typed';
 
 export const Header = () => {
-    const texts = ['Maya', 'Hi!', 'Look around'];
+    const texts = ['Maya', 'Bremen Univ take me in!', 'Look around'];
 
     return (
         <header>
