@@ -1,19 +1,106 @@
-.footer  {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 5vh;
-  line-height: 0;
-  // modern dark blue gradient
-  background-color: #000108;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.cosmic-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, #000108, rgba(0, 1, 8, 0.8));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1000;
+    padding: 10px 0;
 }
 
-.footer img {
-  width: 3vh;
-  margin: 0 1vh;
-  cursor: pointer;
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.cosmic-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.star {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column-reverse;
+    }
+
+    .social-icons {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .copyright {
+        font-size: 0.7rem;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cosmic-footer {
+        padding: 5px 0;
+    }
+
+    .social-icons img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .copyright {
+        font-size: 0.6rem;
+    }
 }

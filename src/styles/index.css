@@ -1,10 +1,7 @@
-@font-face {
-    font-family: 'Maya';
-    src: url('../assets/font/autumn.ttf') format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
 * {
-    font-family: 'Maya', sans-serif;
+    font-family: 'Orbitron', sans-serif;
 }
 
 body {
