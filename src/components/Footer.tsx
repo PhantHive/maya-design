@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
                     </a>
                 </div>
                 <div className="copyright">
-                    © 2024, Phearion / Mayagozel Ovezova / Zakaria Chaouki
+                    © 2024, Maya Graphic Designer. All rights reserved.
                 </div>
             </div>
             <div className="cosmic-stars">
