@@ -100,8 +100,8 @@ canvas {
 }
 
 .swipe-indicator {
-    position: absolute;
-    bottom: 10px;
+    position: relative;
+    bottom: calc(var(--footer-height));
     left: 50%;
     transform: translateX(-50%);
     color: #ffffff;
@@ -109,7 +109,7 @@ canvas {
     font-weight: 700;
     text-align: center;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-    z-index: 10;
+    z-index: 20;
 }
 
 .swipe-indicator span {
@@ -158,6 +158,5 @@ canvas {
 
     .swipe-indicator {
         font-size: 1rem;
-        bottom: var(--footer-height) + 10px;
     }
 }
