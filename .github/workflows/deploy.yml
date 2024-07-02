@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '21'  # Ensure you use the correct Node.js version
+        node-version: '16'  # Ensure you use the correct Node.js version
 
     - name: Install dependencies
       run: npm install
@@ -24,9 +24,15 @@ jobs:
     - name: Build the project
       run: npm run build
 
+    - name: Add CNAME file
+      run: echo 'phantive.com' > ./dist/CNAME
+
+    - name: List contents of dist directory
+      run: ls -al ./dist
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GHPAGES_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
-        cname: phanthive.com  # If you have a custom domain
+        cname: maya-design.cloud  # If you have a custom domain
