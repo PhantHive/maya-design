@@ -12,8 +12,9 @@ body, html {
 
 .body-container {
     width: 100vw;
-    flex-grow: 1;
-    height: 100vh;
+    // should take space between header and footer
+    top: 5vh; // Adjust based on your header height
+    height: calc(100vh - 10vh); // Adjust based on your header and footer height
     overflow: hidden;
     background: #000;
     position: relative;
@@ -104,7 +105,6 @@ canvas {
 
 .swipe-indicator {
     position: absolute;
-    bottom: 5vh;
     left: 50%;
     transform: translateX(-50%);
     color: #ffffff;
@@ -161,6 +161,6 @@ canvas {
 
     .swipe-indicator {
         font-size: 1rem;
-        bottom: 10vh;
+        bottom: 7vh;
     }
 }
