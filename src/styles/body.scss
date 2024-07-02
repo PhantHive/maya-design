@@ -13,7 +13,7 @@ body, html {
 .body-container {
     width: 100vw;
     top: 5vh; // Adjust based on your header height
-    height: calc(var(--vh) - 10vh); // Adjust based on your header and footer height
+    height: calc(100vh - 10vh); // Adjust based on your header and footer height
     overflow: hidden;
     background: #000;
     position: relative;
