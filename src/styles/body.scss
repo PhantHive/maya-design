@@ -158,6 +158,6 @@ canvas {
 
     .swipe-indicator {
         font-size: 1rem;
-        bottom: 5px;
+        bottom: var(--footer-height) + 10px;
     }
 }
