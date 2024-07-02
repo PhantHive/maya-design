@@ -1,11 +1,20 @@
-header {
-    position: fixed; /* Fix the header at the top */
+.header {
+    position: fixed; /* Make the header fixed */
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000; /* Ensure it stays on top of other content */
     background-color: #fff; /* Adjust as needed */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow if needed */
+    height: 60px; /* Adjust based on the height of your header */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Adjust padding as needed */
+}
+
+.main-content {
+    margin-top: 60px; /* Push content below the header */
 }
 
 
