@@ -9,8 +9,8 @@ import {
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
-import { constellations, Constellation } from '../typings/Constellation';
-import useSwipeBehavior from '../effects/useSwipeBehavior';
+import { constellations, Constellation } from '../typings/Constellation.tsx';
+import useSwipeBehavior from '../effects/useSwipeBehavior.tsx';
 
 interface StarProps {
     x: number;
