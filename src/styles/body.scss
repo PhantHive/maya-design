@@ -161,6 +161,7 @@ canvas {
 
     .swipe-indicator {
         font-size: 1rem;
-        bottom: 7vh;
+    //   2vh above the footer
+        bottom: 6vh; // Adjust based on your footer height
     }
 }
