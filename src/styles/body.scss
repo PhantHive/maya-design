@@ -132,6 +132,7 @@ canvas {
 // Media query for mobile devices
 @media (max-width: 1200px) {
     .body-container {
+        top: var(--header-height);
         height: calc(100vh - var(--header-height) - var(--footer-height));
     }
 
