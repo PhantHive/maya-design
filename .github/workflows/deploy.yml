@@ -25,7 +25,7 @@ jobs:
       run: npm run build
 
     - name: Add CNAME file
-      run: echo 'phantive.com' > ./dist/CNAME
+      run: echo 'maya-design.cloud' > ./dist/CNAME
 
     - name: List contents of dist directory
       run: ls -al ./dist
