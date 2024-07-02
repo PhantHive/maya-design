@@ -11,7 +11,6 @@ import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
 import { constellations, Constellation } from '../typings/Constellation';
 import useSwipeBehavior from '../effects/useSwipeBehavior';
-import { Header } from './Header';
 
 interface StarProps {
     x: number;
@@ -415,7 +414,6 @@ export const EnhancedConstellationViewer: React.FC = () => {
 export const Body: React.FC = () => {
     return (
         <div className="body-container">
-            <Header />
             <EnhancedConstellationViewer />
         </div>
     );
