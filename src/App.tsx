@@ -6,21 +6,16 @@ import { useEffect } from 'react';
 
 function App() {
     useEffect(() => {
-        // Calculate the actual viewport height and set it as a CSS variable
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-        // Listen to the resize event and recalculate the viewport height when necessary
-        const handleResize = () => {
-            vh = window.innerHeight * 0.01;
+        const setVh = () => {
+            const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         };
 
-        window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', setVh);
+        setVh();
 
-        // Cleanup function to remove the event listener when the component unmounts
         return () => {
-            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', setVh);
         };
     }, []);
 
