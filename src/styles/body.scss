@@ -101,7 +101,7 @@ canvas {
 
 .swipe-indicator {
     position: relative;
-    bottom: calc(var(--footer-height));
+    bottom: calc(var(--footer-height) + 5vh);
     left: 50%;
     transform: translateX(-50%);
     color: #ffffff;
