@@ -3,6 +3,7 @@ import { Body } from './components/Body.tsx';
 import { Header } from './components/Header.tsx';
 import { Footer } from './components/Footer.tsx';
 import { useEffect } from 'react';
+import Consent from './components/Consent.tsx';
 
 function App() {
     useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
                 <Header />
                 <Body />
                 <Footer />
+                <Consent />
             </div>
         </>
     );
