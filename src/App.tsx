@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import './components/Body';
 import { Body } from './components/Body.tsx';
 import { Header } from './components/Header.tsx';
@@ -6,6 +7,12 @@ import { useEffect } from 'react';
 import Consent from './components/Consent.tsx';
 
 function App() {
+    const [showConsent, setShowConsent] = useState(true);
+
+    const giveConsent = () => {
+        setShowConsent(false);
+    };
+
     useEffect(() => {
         const setVh = () => {
             const vh = window.innerHeight * 0.01;
@@ -23,10 +30,10 @@ function App() {
     return (
         <>
             <div className="App">
+                {showConsent && <Consent giveConsent={giveConsent} />}
                 <Header />
                 <Body />
                 <Footer />
-                <Consent />
             </div>
         </>
     );

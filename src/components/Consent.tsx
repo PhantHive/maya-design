@@ -9,39 +9,11 @@ declare global {
     }
 }
 
-const ConsentBanner: React.FC = () => {
-    const [consentGiven, setConsentGiven] = useState(false);
+interface ConsentBannerProps {
+    giveConsent: () => void;
+}
 
-    const giveConsent = () => {
-        setConsentGiven(true);
-        localStorage.setItem('cookieConsent', 'true');
-        // Set the consent mode to granted
-        window.gtag('consent', 'update', {
-            ad_storage: 'granted',
-            analytics_storage: 'granted',
-        });
-    };
-
-    useEffect(() => {
-        if (localStorage.getItem('cookieConsent') === 'true') {
-            setConsentGiven(true);
-            window.gtag('consent', 'update', {
-                ad_storage: 'granted',
-                analytics_storage: 'granted',
-            });
-        } else {
-            // Set the default consent state to denied
-            window.gtag('consent', 'default', {
-                ad_storage: 'denied',
-                analytics_storage: 'denied',
-            });
-        }
-    }, []);
-
-    if (consentGiven) {
-        return null;
-    }
-
+const ConsentBanner: React.FC<ConsentBannerProps> = ({ giveConsent }) => {
     return (
         <div className="consent-banner">
             <svg
