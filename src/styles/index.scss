@@ -1,33 +1,130 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
+:root {
+  --header-height: 50px;
+  --footer-height: 5rem;
+  --secondary-color: #6366f1;
+  --background-dark: #000108;
+  --background-gradient: linear-gradient(to bottom, #000108, #000824);
+  --z-background: 0;
+  --z-content: 10;
+  --z-nav: 20;
+  --z-modal: 30;
+  --z-header: 40;
+  --z-footer: 40;
+  --backdrop-blur: blur(8px);
+  --primary-color: #00d9f6;
+  --dark-bg: rgba(5, 5, 10, 0.95);
+  --light-bg: rgba(255, 255, 255, 0.05);
+  --dark-shadow: rgba(0, 0, 0, 0.3);
+  --light-shadow: rgba(0, 0, 0, 0.1);
+  --dark-overlay: rgba(0, 0, 0, 0.95);
+  --light-overlay: rgba(0, 0, 0, 0.9);
+  --animation-duration: 20s;
+  --animation-delay: -1s;
+  --background-gradien-light: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+}
+
+.blur-backdrop {
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    will-change: backdrop-filter;
+}
+
 * {
-    box-sizing: border-box;
-    font-family: 'Orbitron', sans-serif;
+  box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--background-dark);
+  color: #fff;
+  overflow: hidden;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-:root {
-    --header-height: 50px;
-    --footer-height: 55px;
+.main-container {
+  flex: 1;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+button {
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
 }
 
-@import 'header.scss';
-@import 'footer.scss';
-@import 'body.scss';
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.fade-enter {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.slide-up-enter {
+  animation: slideUp 0.3s ease forwards;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+@import './header.scss';
+@import './footer.scss';
+@import './body.scss';
+@import './portfolio.scss';
+@import './constellation.scss';

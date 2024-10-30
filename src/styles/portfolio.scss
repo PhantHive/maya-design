@@ -1,0 +1,293 @@
+.portfolio-section {
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    overflow-y: auto;
+    will-change: transform, opacity;
+
+    &[data-theme="dark"] .filter-buttons button {
+        background: rgba(54, 54, 54, 1);
+        border: 1px solid rgba(30, 30, 30, 0.8);
+        color: #ffffff;
+
+        &:hover {
+            background: rgba(101, 101, 101, 0.95);
+        }
+
+        &.active {
+            color: #000000;
+            background: #ffffff;
+            border-color: var(--primary-color);
+        }
+    }
+
+    &[data-theme="light"] .filter-buttons button {
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #1a1a1a;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        &.active {
+            background: #1a1a1a;
+            border-color: var(--primary-color);
+            color: white;
+        }
+    }
+
+    .filter-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+    }
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.portfolio-item {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 1;
+    @extend .blur-backdrop;
+    transition: transform 0.2s ease-out;
+
+    .item-title {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        color: white;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        padding: 0.5rem 1rem;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    &[data-theme="dark"] {
+        background: var(--dark-bg);
+        box-shadow: 0 4px 6px var(--dark-shadow);
+    }
+
+    &[data-theme="light"] {
+        background: var(--light-bg);
+        box-shadow: 0 4px 6px var(--light-shadow);
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.2s ease-out;
+    }
+
+    &:hover {
+        img { transform: scale(1.05); }
+        .portfolio-overlay { opacity: 1; }
+    }
+}
+
+.portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    &[data-theme="dark"] {
+        background: linear-gradient(to top, var(--dark-overlay), rgba(0, 0, 0, 0.7) 50%, transparent);
+        p { color: rgba(255, 255, 255, 0.9); }
+    }
+
+    &[data-theme="light"] {
+        background: linear-gradient(to top, var(--light-overlay), rgba(0, 0, 0, 0.6) 50%, transparent);
+        p { color: rgba(255, 255, 255, 0.95); }
+    }
+
+    h3 {
+        color: var(--primary-color);
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.875rem;
+    }
+}
+
+.portfolio-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+
+    &[data-theme="dark"] {
+        background: rgba(0, 0, 0, 0.98);
+
+        .modal-content {
+            background: var(--dark-bg);
+        }
+
+        .modal-body, .close-button {
+            color: white;
+        }
+    }
+
+    &[data-theme="light"] {
+        background: rgba(0, 0, 0, 0.85);
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .modal-body {
+            color: #1a1a1a;
+        }
+
+        .close-button {
+            color: #ffffff;
+        }
+    }
+
+    .modal-content {
+        border-radius: 1rem;
+        overflow: hidden;
+        max-width: 1200px;
+        width: 90%;
+        max-height: 90vh;
+    }
+
+    .modal-body {
+        padding: 2rem;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+        z-index: 1;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+
+        span {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 217, 246, 0.1);
+            border: 1px solid rgba(0, 217, 246, 0.2);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-section {
+        padding: 4rem 0.75rem 0.75rem;
+        height: 100vh;
+        overflow-y: auto;
+
+        .filter-buttons {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0 0.5rem;
+
+            button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+                min-width: auto;
+            }
+        }
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding-bottom: 5rem;
+    }
+
+    .portfolio-item {
+        .item-title {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            margin-bottom: -0.2rem;
+            padding: 0 1rem;
+        }
+
+        .portfolio-overlay {
+            padding: 0.5rem;
+
+            h3 {
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+            }
+
+            p {
+                font-size: 0.65rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .portfolio-modal {
+        padding: 0;
+
+        .modal-content {
+            width: 100%;
+            height: 100vh;
+            border-radius: 0;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .tech-tags span {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.75rem;
+        }
+    }
+}
