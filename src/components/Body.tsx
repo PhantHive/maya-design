@@ -61,7 +61,7 @@ export const Body: React.FC = () => {
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeSection}
-                        className="relative z-10 w-screen h-full mx-auto"
+                        className="relative z-10 w-full h-full mx-auto"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}

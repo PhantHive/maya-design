@@ -131,6 +131,15 @@ export const portfolioData: PortfolioItem[] = [
         technologies: ['Adobe Illustrator'],
         image: 'Mythical-Assets.png',
         liveUrl: 'https://phearion.mythical.fr',
+    },
+    {
+        id: 6,
+        name: 'Ospor mockup',
+        type: 'advertising',
+        description: 'Mockup of a fictional sports brand for a university project.',
+        client: 'Ospor',
+        campaignDate: '2023',
+        image: 'Ospor-Ad.png'
     }
 ];
 

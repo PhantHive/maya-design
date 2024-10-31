@@ -1,5 +1,5 @@
 // App.tsx
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { Background } from './components/Background';
 import { Header } from './components/Header';
@@ -8,12 +8,14 @@ import { Footer } from './components/Footer';
 
 const App: React.FC = () => {
     return (
-        <ThemeProvider>
-            <Background />
-            <Header />
-            <Body />
-            <Footer />
-        </ThemeProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+            <ThemeProvider>
+                <Background />
+                <Header />
+                <Body />
+                <Footer />
+            </ThemeProvider>
+        </Suspense>
     );
 };
 
