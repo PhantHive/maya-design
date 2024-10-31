@@ -27,7 +27,7 @@ const PortfolioGallery: React.FC = () => {
         const debouncedSetFilter = debounce(() => {
             setIsDisabled(true);
             setFilter(id as never);
-            setTimeout(() => setIsDisabled(false), 300); // Re-enable buttons after 300ms
+            setTimeout(() => setIsDisabled(false), 450); // Re-enable buttons after 450ms
         }, 300);
 
         debouncedSetFilter();

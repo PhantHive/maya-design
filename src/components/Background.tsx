@@ -16,7 +16,7 @@ export const Background: React.FC = () => {
             >
                 {theme === 'dark' ? (
                     <div className="star-field">
-                        {[...Array(10)].map((_, i) => (
+                        {[...Array(7)].map((_, i) => (
                             <div key={i} className="star" />
                         ))}
                     </div>
