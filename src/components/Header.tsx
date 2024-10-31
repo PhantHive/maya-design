@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
                 <h1>
                     <ReactTyped
                         strings={texts}
-                        typeSpeed={100}
+                        typeSpeed={150}
                         backSpeed={50}
                         loop
                     />
@@ -26,7 +26,7 @@ export const Header: React.FC = () => {
             </div>
             {theme === 'dark' && (
                 <div className="cosmic-stars">
-                    {[...Array(50)].map((_, i) => (
+                    {[...Array(25)].map((_, i) => (
                         <div
                             key={i}
                             className="star"

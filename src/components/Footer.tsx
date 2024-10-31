@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
             </div>
             {theme === 'dark' && (
                 <div className="cosmic-stars">
-                    {[...Array(30)].map((_, i) => (
+                    {[...Array(20)].map((_, i) => (
                         <div
                             key={i}
                             className="star"

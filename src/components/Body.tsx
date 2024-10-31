@@ -1,15 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PortfolioGallery from './PortfolioGallery';
 import { EnhancedConstellationViewer } from './ConstellationViewer';
 import { Layers, Star, Moon, Sun } from 'lucide-react';
 import { Background } from './Background';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { useState } from 'react';
+
+const debounce = (func: (...args: any[]) => void, wait: number) => {
+    let timeout: NodeJS.Timeout;
+    return (...args: any[]) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), wait);
+    };
+};
 
 export const Body: React.FC = () => {
     const [activeSection, setActiveSection] = useState<'constellations' | 'portfolio'>('constellations');
+    const [isDisabled, setIsDisabled] = useState(false);
     const { theme, setTheme } = useContext(ThemeContext);
+
+    const handleNavChange = useCallback((section: 'constellations' | 'portfolio') => {
+        const debouncedSetActiveSection = debounce(() => {
+            setIsDisabled(true);
+            setActiveSection(section);
+            setTimeout(() => setIsDisabled(false), 450); // Re-enable buttons after 450ms
+        }, 300);
+
+        debouncedSetActiveSection();
+    }, []);
 
     return (
         <>
@@ -41,8 +59,9 @@ export const Body: React.FC = () => {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => setActiveSection('constellations')}
+                        onClick={() => handleNavChange('constellations')}
                         className={`${activeSection === 'constellations' ? 'active' : ''}`}
+                        disabled={isDisabled}
                     >
                         <Star size={16} />
                         <span>Logos</span>
@@ -50,8 +69,9 @@ export const Body: React.FC = () => {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => setActiveSection('portfolio')}
+                        onClick={() => handleNavChange('portfolio')}
                         className={`${activeSection === 'portfolio' ? 'active' : ''}`}
+                        disabled={isDisabled}
                     >
                         <Layers size={16} />
                         <span>Portfolio</span>
