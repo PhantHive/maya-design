@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-export const Background: React.FC = () => {
+export const Background: React.FC = React.memo(() => {
     const { theme } = useContext(ThemeContext);
 
     return (
@@ -30,4 +30,4 @@ export const Background: React.FC = () => {
             </motion.div>
         </AnimatePresence>
     );
-};
+});
