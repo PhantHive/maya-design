@@ -1,5 +1,4 @@
-// components/PortfolioGallery.tsx
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink } from 'lucide-react';
 import { PortfolioItem } from '../types/Portfolio';
@@ -9,11 +8,30 @@ import { ThemeContext } from '../contexts/ThemeContext';
 const PortfolioGallery: React.FC = () => {
     const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
     const [filter, setFilter] = useState<'all' | 'logo' | 'ui' | 'advertising'>('all');
+    const [isDisabled, setIsDisabled] = useState(false);
     const { theme } = useContext(ThemeContext);
 
-    const filteredItems = portfolioData.filter(item =>
-        filter === 'all' || item.type === filter
-    );
+    const filteredItems = useMemo(() => {
+        return portfolioData.filter(item => filter === 'all' || item.type === filter);
+    }, [filter]);
+
+    const handleFilterChange = useCallback((id: string) => {
+        const debounce = (func: (...args: never[]) => void, wait: number) => {
+            let timeout: NodeJS.Timeout;
+            return (...args: never[]) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func(...args), wait);
+            };
+        };
+
+        const debouncedSetFilter = debounce(() => {
+            setIsDisabled(true);
+            setFilter(id as never);
+            setTimeout(() => setIsDisabled(false), 300); // Re-enable buttons after 300ms
+        }, 300);
+
+        debouncedSetFilter();
+    }, []);
 
     const filterButtons = [
         { id: 'all', label: 'All Work' },
@@ -28,23 +46,21 @@ const PortfolioGallery: React.FC = () => {
                 {filterButtons.map(({ id, label }) => (
                     <motion.button
                         key={id}
-                        onClick={() => setFilter(id as never)}
+                        onClick={() => handleFilterChange(id as never)}
                         className={`px-6 py-3 rounded-full transition-all ${
                             filter === id ? 'active' : ''
                         }`}
                         data-theme={theme}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        disabled={isDisabled}
                     >
                         {label}
                     </motion.button>
                 ))}
             </div>
 
-            <motion.div
-                className="portfolio-grid"
-                layout
-            >
+            <motion.div className="portfolio-grid" layout>
                 <AnimatePresence mode="popLayout">
                     {filteredItems.map((item) => (
                         <motion.div
