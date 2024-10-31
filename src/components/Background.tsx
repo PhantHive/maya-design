@@ -8,7 +8,6 @@ export const Background: React.FC = () => {
     return (
         <AnimatePresence mode="wait">
             <motion.div
-                key={theme}
                 className={`background-container ${theme}-theme`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
