@@ -38,7 +38,7 @@ export const portfolioData: PortfolioItem[] = [
         id: 0,
         name: 'Phearion',
         type: 'logo',
-        description: 'Dynamic brand identity with cosmic elements',
+        description: 'A minimalist logo designed for a tech company.',
         constellationSize: [
             { x: 10, y: 10 },
             { x: 300, y: 300 },
@@ -57,7 +57,7 @@ export const portfolioData: PortfolioItem[] = [
         id: 1,
         name: 'Xonic',
         type: 'logo',
-        description: 'Minimalist tech-focused logo design',
+        description: 'Minimalist tech-focused logo design for a workshop.',
         constellationSize: [
             { x: 25, y: 60 },
             { x: 300, y: 300 },
@@ -74,7 +74,7 @@ export const portfolioData: PortfolioItem[] = [
         id: 2,
         name: 'BigBrain',
         type: 'logo',
-        description: 'Educational platform branding',
+        description: 'Logo of an AI project for students. The project is called BigBrain and aims to help students with their studies thanks to large language models.',
         constellationSize: [
             { x: 50, y: 60 },
             { x: 300, y: 300 },
@@ -96,7 +96,7 @@ export const portfolioData: PortfolioItem[] = [
         id: 3,
         name: 'Lumina',
         type: 'logo',
-        description: 'Elegant lighting brand identity',
+        description: 'Elegant lighting brand logo for a video game.',
         constellationSize: [
             { x: 75, y: 10 },
             { x: 300, y: 300 },

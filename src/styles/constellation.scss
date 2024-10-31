@@ -5,7 +5,8 @@
     width: 800px;
     height: 800px;
     perspective: 1000px;
-    will-change: transform, opacity;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .constellations-container {
@@ -15,15 +16,17 @@
     width: 80%;
     height: 80%;
     transform-style: preserve-3d;
+    transform: translateZ(0);
 }
 
 .constellation {
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    transform: translateZ(0);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05) translateZ(0);
         box-shadow: 0 0 20px rgba(0, 217, 246, 0.5);
     }
 
@@ -36,6 +39,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    transform: translateZ(0);
 }
 
 .constellation-svg {
@@ -44,23 +48,36 @@
     stroke: #fff;
     stroke-width: 1;
     fill: none;
+    transform: translateZ(0);
+    will-change: stroke-dashoffset;
 
     line {
         stroke-dasharray: 4;
-        animation: dash 20s linear 5s;
+        animation: dash 20s linear infinite;
+        animation-play-state: paused;
+        will-change: stroke-dashoffset;
+    }
+
+    &:hover line {
+        animation-play-state: running;
     }
 }
-
 
 .star {
     position: absolute;
     background-color: #fff;
     border-radius: 50%;
     box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7);
+    transform: translateZ(0);
     will-change: transform, opacity;
 
     &.pulse {
-        animation: pulse 2s ease-in-out 5s;
+        animation: pulse 2s ease-in-out infinite;
+        animation-play-state: paused;
+    }
+
+    &:hover {
+        animation-play-state: running;
     }
 }
 
@@ -74,7 +91,8 @@
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease-out;
+    transform: translateZ(0);
 }
 
 .project-image {
@@ -82,22 +100,14 @@
     max-height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(0, 217, 246, 0.5));
+    transform: translateZ(0);
 }
 
-
+// Theme specific styles
 .constellation-viewer[data-theme="light"] {
-    .constellation {
+    .constellation-svg {
         stroke: rgba(0, 0, 0, 0.6);
         stroke-width: 1.5;
-
-        line {
-            stroke-dasharray: 4;
-            animation: dash 20s linear infinite;
-        }
-
-        &:hover {
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
     }
 
     .star {
@@ -106,6 +116,7 @@
 
         &.pulse {
             animation: pulseLight 2s ease-in-out infinite;
+            animation-play-state: paused;
         }
     }
 
@@ -114,19 +125,49 @@
     }
 }
 
-.constellation-viewer[data-theme="dark"] {
-    .constellation-svg {
-        stroke: #fff;
-        stroke-width: 1;
-    }
-
-    .star {
-        background-color: #fff;
-        box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7);
-    }
-}
-
+// Mobile styles
 @media (max-width: 768px) {
+    .constellations-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .constellation {
+        transform: scale(0.8) translateZ(0);
+        box-shadow: none;
+        width: 100%;
+        height: 100%;
+
+        &:hover {
+            transform: scale(0.8) translateZ(0);
+            box-shadow: none;
+        }
+    }
+
+    .constellation-stars {
+        display: none;
+    }
+
+    .constellation-image-container {
+        top: 5%;
+        left: 50%;
+        transform: translate(-50%, 0) translateZ(0);
+        pointer-events: none;
+        opacity: 1 !important;
+        width: 60%;
+        transition: none;
+    }
+
+    .constellation-svg {
+        display: block;
+        opacity: 0.7;
+        stroke-width: 5px;
+        transform: scale(0.9) translateZ(0);
+    }
+
+    // Theme specific mobile adjustments
     .constellation-viewer[data-theme="light"] {
         .constellation-svg {
             opacity: 0.9;
@@ -145,127 +186,23 @@
             stroke-width: 5px;
         }
     }
-}
-
-@keyframes pulseLight {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.8;
-    }
-}
-
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.7;
-    }
-    50% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-}
-
-@keyframes wave {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-.swipe-indicator span {
-    display: inline-block;
-    animation: wave 2s infinite;
-    font-family: 'Roboto', sans-serif;
-    will-change: transform;
-}
-
-@keyframes wave {
-    0%, 100% { transform: scaleY(1); }
-    50% { transform: scaleY(1.5); }
-}
-
-.swipe-indicator .s { animation-delay: 0s; }
-.swipe-indicator .w { animation-delay: 0.2s; }
-.swipe-indicator .i { animation-delay: 0.4s; }
-.swipe-indicator .p { animation-delay: 0.6s; }
-.swipe-indicator .e { animation-delay: 0.8s; }
-
-@media (max-width: 768px) {
-    .constellations-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .constellation {
-        transform: scale(0.8);
-        box-shadow: none;
-        width: 100%;
-        height: 100%;
-        will-change: transform, opacity;
-    }
-
-    .constellation-stars {
-        display: none;
-        //position: absolute;
-        //width: 50%;    // Match SVG viewBox width
-        //height: 50%;   // Match SVG viewBox height
-        //top: 50%;
-        //left: 50%;
-        //transform: translate(-50%, -50%);
-    }
-
-    .constellation-image-container {
-        top: 5%;
-        left: 50%;
-        transform: translate(-50%, 0);
-        pointer-events: none;
-        opacity: 1 !important;
-        width: 60%;
-    }
-
-    .constellation:hover {
-        transform: scale(1);
-        box-shadow: none;
-    }
-
-    .constellation-svg {
-        display: block;
-        opacity: 0.7;
-        stroke-width: 5px;
-        scale: 0.9;
-    }
-
-    // remove the transition effect
-    .constellation-image-container {
-        transition: none;
-    }
-
-    .star {
-        position: absolute;
-        background-color: #fff;
-        border-radius: 50%;
-        box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7);
-        animation: pulse 2s ease-in-out infinite;
-    }
 
     .swipe-indicator {
         font-size: 1.5rem;
         position: absolute;
         bottom: calc(var(--header-height) + 7rem);
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) translateZ(0);
         color: white;
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
         z-index: 10;
+        transform: translateZ(0);
 
         span {
             display: inline-block;
             animation: wave 2s infinite;
+            animation-play-state: paused;
+            will-change: transform;
 
             @for $i from 1 through 5 {
                 &:nth-child(#{$i}) {
@@ -273,5 +210,41 @@
                 }
             }
         }
+
+        &:hover span {
+            animation-play-state: running;
+        }
+    }
+}
+
+// Optimized animations
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) translateZ(0);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2) translateZ(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseLight {
+    0%, 100% {
+        transform: scale(1) translateZ(0);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2) translateZ(0);
+        opacity: 0.8;
+    }
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0) translateZ(0);
+    }
+    50% {
+        transform: translateY(-5px) translateZ(0);
     }
 }

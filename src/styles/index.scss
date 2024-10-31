@@ -1,128 +1,216 @@
+// Import font with display swap for better performance
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
+// Theme and layout variables
 :root {
-  --header-height: 50px;
-  --footer-height: 5rem;
-  --secondary-color: #6366f1;
-  --background-dark: #000108;
-  --background-gradient: linear-gradient(to bottom, #000108, #000824);
-  --z-background: 0;
-  --z-content: 10;
-  --z-nav: 20;
-  --z-modal: 30;
-  --z-header: 40;
-  --z-footer: 40;
-  --backdrop-blur: blur(8px);
-  --primary-color: #00d9f6;
-  --dark-bg: rgba(5, 5, 10, 0.95);
-  --light-bg: rgba(255, 255, 255, 0.05);
-  --dark-shadow: rgba(0, 0, 0, 0.3);
-  --light-shadow: rgba(0, 0, 0, 0.1);
-  --dark-overlay: rgba(0, 0, 0, 0.95);
-  --light-overlay: rgba(0, 0, 0, 0.9);
-  --animation-duration: 20s;
-  --animation-delay: -1s;
-  --background-gradien-light: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+    // Layout
+    --header-height: 50px;
+    --footer-height: 5rem;
+    --container-max-width: 1400px;
+
+    // Z-index layers
+    --z-background: 0;
+    --z-content: 10;
+    --z-nav: 20;
+    --z-modal: 30;
+    --z-header: 40;
+    --z-footer: 40;
+
+    // Effects
+    --backdrop-blur: blur(8px);
+    --transition-fast: 0.2s ease-out;
+    --transition-medium: 0.3s ease-out;
+
+    // Colors
+    --primary-color: #00d9f6;
+    --secondary-color: #6366f1;
+
+    // Dark theme
+    --background-dark: #000108;
+    --background-gradient: linear-gradient(to bottom, #000108, #000824);
+    --dark-bg: rgba(5, 5, 10, 0.95);
+    --dark-shadow: rgba(0, 0, 0, 0.3);
+    --dark-overlay: rgba(0, 0, 0, 0.95);
+
+    // Light theme
+    --background-gradient-light: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+    --light-bg: rgba(255, 255, 255, 0.05);
+    --light-shadow: rgba(0, 0, 0, 0.1);
+    --light-overlay: rgba(0, 0, 0, 0.9);
+
+    // Animation
+    --animation-duration: 20s;
+    --animation-delay: -1s;
 }
 
+// Performance optimized blur backdrop
 .blur-backdrop {
-    backdrop-filter: var(--backdrop-blur);
-    -webkit-backdrop-filter: var(--backdrop-blur);
-    will-change: backdrop-filter;
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        backdrop-filter: var(--backdrop-blur);
+        -webkit-backdrop-filter: var(--backdrop-blur);
+        transition: background-color var(--transition-fast);
+    }
 }
 
+// Hardware acceleration utility
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+// Base styles
 * {
-  box-sizing: border-box;
-  font-family: 'Orbitron', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: var(--background-dark);
-  color: #fff;
-  overflow: hidden;
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+    font-family: 'Orbitron', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--background-dark);
+    color: #fff;
+    overflow: hidden;
+    @extend .gpu-accelerated;
 }
 
+.background-container {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-background);
+    overflow: hidden;
+    @extend .gpu-accelerated;
+    transition: background-color var(--transition-medium);
+
+    &.dark-theme {
+        background: var(--background-gradient);
+    }
+
+    &.light-theme {
+        background: var(--background-gradient-light);
+    }
+}
+
+// Layout
 .main-container {
-  flex: 1;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
+    position: relative;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @extend .gpu-accelerated;
 }
 
+// Interactive elements
 button {
-  font-family: 'Orbitron', sans-serif;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform var(--transition-fast),
+                background-color var(--transition-fast),
+                color var(--transition-fast);
 
-  &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-  }
+    &:focus-visible {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
 }
 
 a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
+    color: var(--primary-color);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity var(--transition-fast);
 
-  &:hover {
-    opacity: 0.8;
-  }
+    &:hover {
+        opacity: 0.8;
+    }
 }
 
 img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
 }
 
+// Optimized animations
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translate3d(0, 20px, 0);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
 }
 
+// Animation classes
 .fade-enter {
-  animation: fadeIn 0.3s ease forwards;
+    animation: fadeIn var(--transition-medium) forwards;
+    @extend .gpu-accelerated;
 }
 
 .slide-up-enter {
-  animation: slideUp 0.3s ease forwards;
+    animation: slideUp var(--transition-medium) forwards;
+    @extend .gpu-accelerated;
 }
 
+// Scrollbar styling
 ::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    transition: background-color var(--transition-fast);
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
+    &:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
 }
 
+// Touch device optimizations
+@media (hover: none) {
+    button:hover,
+    a:hover {
+        opacity: 1;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+// Import component styles after base styles
 @import './header.scss';
 @import './footer.scss';
 @import './body.scss';

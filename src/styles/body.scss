@@ -1,7 +1,7 @@
 // styles/body.scss
 @keyframes moveStars {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-100vh); }
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(0, -100vh, 0); }
 }
 
 @keyframes dash {
@@ -15,28 +15,37 @@
     height: 100vh;
     width: 100vw;
     position: relative;
+    transform: translateZ(0);
 }
 
 .nav-buttons {
     position: fixed;
     top: calc(var(--header-height) + 1rem);
     right: 1rem;
-    z-index: 20;
+    z-index: var(--z-nav);
     display: flex;
     gap: 1rem;
+    transform: translateZ(0);
 
     button {
         display: flex;
         align-items: center;
         gap: 0.5rem;
         padding: 0.75rem 1.5rem;
-        background: rgba(255, 255, 255, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 2rem;
-        color: white;
         font-size: 0.875rem;
-        @extend .blur-backdrop;
-        transition: all 0.2s ease;
+        transform: translateZ(0);
+        transition: background-color 0.2s ease-out;
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            z-index: -1;
+        }
     }
 }
 
@@ -79,15 +88,25 @@
     position: fixed;
     top: 5rem;
     left: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 2rem;
-    padding: 0.5rem;
     z-index: var(--z-nav);
-    @extend .blur-backdrop;
     display: flex;
     gap: 0.5rem;
-    transition: all 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    transform: translateZ(0);
+    transition: background-color 0.2s ease-out;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        backdrop-filter: var(--backdrop-blur);
+        -webkit-backdrop-filter: var(--backdrop-blur);
+        z-index: -1;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
     button {
         padding: 0.4rem;
@@ -96,7 +115,8 @@
         align-items: center;
         justify-content: center;
         color: #776f6f;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease-out;
+        transform: translateZ(0);
 
         &.active {
             background: var(--primary-color);
@@ -110,7 +130,9 @@
     inset: 0;
     z-index: 0;
     overflow: hidden;
-    transition: all 1s ease;
+    transform: translateZ(0);
+    transition: background-color 0.5s ease-out;
+    pointer-events: none;
 }
 
 .dark-theme {
@@ -121,6 +143,7 @@
         inset: 0;
         perspective: 1000px;
         opacity: 0.8;
+        transform: translateZ(0);
     }
 
     .star {
@@ -129,9 +152,11 @@
         height: 2px;
         background: white;
         border-radius: 50%;
+        transform: translateZ(0);
+        will-change: transform;
         animation: starFloat var(--animation-duration) linear infinite;
 
-        @for $i from 1 through 50 {
+        @for $i from 1 through 30 { // Reduced from 50 to 30 for better performance
             &:nth-child(#{$i}) {
                 left: random(100) * 1%;
                 top: random(100) * 1%;
@@ -151,9 +176,11 @@
         opacity: 0.7;
         background: white;
         border-radius: 50%;
+        transform: translateZ(0);
+        will-change: transform;
         animation: cloudFloat 30s linear infinite;
 
-        @for $i from 1 through 8 {
+        @for $i from 1 through 6 { // Reduced from 8 to 6 for better performance
             &:nth-child(#{$i}) {
                 width: (random(100) + 100) * 1px;
                 height: (random(60) + 40) * 1px;
@@ -168,19 +195,19 @@
 
 @keyframes starFloat {
     from {
-        transform: translateZ(0px);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translateZ(1000px);
+        transform: translate3d(0, 0, 1000px);
     }
 }
 
 @keyframes cloudFloat {
     from {
-        transform: translateX(-100%);
+        transform: translate3d(-100%, 0, 0);
     }
     to {
-        transform: translateX(calc(100vw + 100%));
+        transform: translate3d(calc(100vw + 100%), 0, 0);
     }
 }
 
@@ -189,13 +216,13 @@
         top: auto;
         bottom: calc(var(--footer-height) + 5rem);
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
     }
 
     .nav-buttons {
         top: auto;
         bottom: calc(var(--footer-height) + 1rem);
         right: 50%;
-        transform: translateX(50%);
+        transform: translate3d(50%, 0, 0);
     }
 }

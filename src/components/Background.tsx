@@ -13,17 +13,17 @@ export const Background: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 0.3 }}
             >
                 {theme === 'dark' ? (
                     <div className="star-field">
-                        {[...Array(50)].map((_, i) => (
+                        {[...Array(30)].map((_, i) => (
                             <div key={i} className="star" />
                         ))}
                     </div>
                 ) : (
                     <div className="cloud-field">
-                        {[...Array(8)].map((_, i) => (
+                        {[...Array(6)].map((_, i) => (
                             <div key={i} className="cloud" />
                         ))}
                     </div>

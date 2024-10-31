@@ -7,15 +7,34 @@
     min-height: var(--footer-height);
     max-height: var(--footer-height);
     z-index: var(--z-footer);
-    @extend .blur-backdrop;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     box-sizing: border-box;
-    transition: all 0.5s ease;
-    box-shadow: 0 0 10px rgb(15, 228, 250);
+    transform: translateZ(0);
 
+    // Use pseudo-element for backdrop and effects
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        backdrop-filter: var(--backdrop-blur);
+        -webkit-backdrop-filter: var(--backdrop-blur);
+        z-index: -1;
+        transition: background-color 0.3s ease-out;
+    }
+
+    // Separate element for glow effect
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        box-shadow: 0 0 10px rgb(15, 228, 250);
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.7;
+    }
 
     .footer-content {
         display: flex;
@@ -23,10 +42,10 @@
         align-items: center;
         justify-content: center;
         position: relative;
-        z-index: 2;
         width: 100%;
         max-width: 1200px;
         padding: 0 20px;
+        transform: translateZ(0);
     }
 
     .social-icons {
@@ -41,53 +60,59 @@
             justify-content: center;
             padding: 0.5rem;
             border-radius: 50%;
-            transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.1);
+            transform: translateZ(0);
+            transition: transform 0.2s ease-out, background-color 0.2s ease-out, color 0.2s ease-out;
 
             &:hover {
-                transform: translateY(-2px);
-                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px) translateZ(0);
             }
 
             svg {
-                transition: all 0.3s ease;
+                width: 20px;
+                height: 20px;
             }
         }
     }
 
-    // Theme specific styles
-    &[data-theme="dark"] {
-        .social-icons {
-            a {
-                color: rgba(255, 255, 255, 0.9);
+    .copyright {
+        font-size: 0.9rem;
+        transition: color 0.3s ease-out;
+    }
 
-                &:hover {
-                    color: var(--primary-color);
-                }
+    // Theme specific styles with reduced transitions
+    &[data-theme="dark"] {
+        .social-icons a {
+            color: rgba(255, 255, 255, 0.9);
+
+            &:hover {
+                color: var(--primary-color);
             }
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
         }
     }
 
     &[data-theme="light"] {
-        .social-icons {
-            a {
-                color: rgba(0, 0, 0, 0.8);
-                background: rgba(0, 0, 0, 0.05);
+        .social-icons a {
+            color: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.05);
 
-                &:hover {
-                    color: var(--primary-color);
-                    background: rgba(0, 0, 0, 0.1);
-                }
+            &:hover {
+                color: var(--primary-color);
+                background: rgba(0, 0, 0, 0.1);
             }
         }
 
-        // any text become black
         .copyright {
             color: rgba(0, 0, 0, 0.8);
         }
     }
 }
 
+// Mobile optimization
 @media (max-width: 768px) {
     .cosmic-footer {
         .social-icons {
@@ -95,12 +120,21 @@
 
             a {
                 padding: 0.4rem;
+                // Disable hover effect on mobile to improve performance
+                &:hover {
+                    transform: none;
+                }
 
                 svg {
                     width: 18px;
                     height: 18px;
                 }
             }
+        }
+
+        // Reduce shadow intensity on mobile
+        &::after {
+            opacity: 0.5;
         }
     }
 }
