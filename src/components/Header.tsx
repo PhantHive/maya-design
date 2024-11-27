@@ -6,10 +6,7 @@ export const Header: React.FC = () => {
     const { theme } = useContext(ThemeContext);
     const texts = [
         'I am Maya',
-        'Freelance',
-        'Seeking EMLV\'s Master acceptance',
-        'I make cool stuff',
-        'Your Ideas, My Canvas',
+        'Welcome to my Portfolio',
     ];
 
     return (

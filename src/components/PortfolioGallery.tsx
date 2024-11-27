@@ -27,7 +27,7 @@ const PortfolioGallery: React.FC = () => {
         const debouncedSetFilter = debounce(() => {
             setIsDisabled(true);
             setFilter(id as never);
-            setTimeout(() => setIsDisabled(false), 450); // Re-enable buttons after 450ms
+            setTimeout(() => setIsDisabled(false), 250);
         }, 300);
 
         debouncedSetFilter();
@@ -41,57 +41,59 @@ const PortfolioGallery: React.FC = () => {
     ];
 
     return (
-        <div className="portfolio-section" data-theme={theme}>
-            <div className="filter-buttons mb-8 flex justify-center gap-4">
-                {filterButtons.map(({ id, label }) => (
-                    <motion.button
-                        key={id}
-                        onClick={() => handleFilterChange(id as never)}
-                        className={`px-6 py-3 rounded-full transition-all ${
-                            filter === id ? 'active' : ''
-                        }`}
-                        data-theme={theme}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        disabled={isDisabled}
-                    >
-                        {label}
-                    </motion.button>
-                ))}
+        <>
+            <div className="portfolio-section" data-theme={theme}>
+                <div className="filter-buttons-container" data-theme={theme}>
+                    <div className="filter-buttons">
+                        {filterButtons.map(({ id, label }) => (
+                            <motion.button
+                                key={id}
+                                onClick={() => handleFilterChange(id as never)}
+                                className={`transition-all ${filter === id ? 'active' : ''}`}
+                                data-theme={theme}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                disabled={isDisabled}
+                            >
+                                {label}
+                            </motion.button>
+                        ))}
+                    </div>
+                </div>
+                <div className="scrollable-content">
+                    <motion.div className="portfolio-grid" layout>
+                        <AnimatePresence mode="popLayout">
+                            {filteredItems.map((item) => (
+                                <motion.div
+                                    key={item.id}
+                                    layoutId={`portfolio-${item.id}`}
+                                    className="portfolio-item"
+                                    data-theme={theme}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => setSelectedItem(item)}
+                                >
+                                    <div className="item-title" data-theme={theme}>
+                                        {item.name}
+                                    </div>
+                                    <div className="item-container" data-theme={theme}>
+                                        <img
+                                            src={item.image}
+                                            alt={item.name}
+                                            className="portfolio-image"
+                                        />
+                                        <div className="portfolio-overlay" data-theme={theme}>
+                                            <p>{item.description}</p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    </motion.div>
+                </div>
             </div>
-
-            <motion.div className="portfolio-grid" layout>
-                <AnimatePresence mode="popLayout">
-                    {filteredItems.map((item) => (
-                        <motion.div
-                            key={item.id}
-                            layoutId={`portfolio-${item.id}`}
-                            className="portfolio-item"
-                            data-theme={theme}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => setSelectedItem(item)}
-                        >
-                            <div className="item-title" data-theme={theme}>
-                                {item.name}
-                            </div>
-                            <div className="item-container" data-theme={theme}>
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="portfolio-image"
-                                />
-                                <div className="portfolio-overlay" data-theme={theme}>
-                                    <p>{item.description}</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </AnimatePresence>
-            </motion.div>
-
             <AnimatePresence>
                 {selectedItem && (
                     <motion.div
@@ -150,8 +152,45 @@ const PortfolioGallery: React.FC = () => {
                                                 View Live Project
                                             </a>
                                         )}
+                                        {selectedItem.association && (
+                                            <p className={`text-sm ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                                                <strong>Association:</strong>{' '}
+                                                {selectedItem.association}
+                                            </p>
+                                        )}
+                                        {selectedItem.company && (
+                                            <p className={`text-sm ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                                                <strong>Company:</strong>{' '}
+                                                {selectedItem.company}
+                                            </p>
+                                        )}
                                     </div>
                                 )}
+
+                                {/*// add for logos company and fake company if it exists (attribute exist or no) otherwise don't show it like the url above */}
+                                {selectedItem.type === 'logo' && (
+                                    <div className="space-y-2 mt-4">
+                                        {selectedItem.company && (
+                                            <p className={`text-sm ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                                                <strong>Company:</strong>{' '}
+                                                {selectedItem.company}
+                                            </p>
+                                        )}
+                                        {selectedItem.fictionalCompany && (
+                                            <p className={`text-sm ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                                                <strong>Fictional Company:</strong>{' '}
+                                                {selectedItem.fictionalCompany}
+                                            </p>
+                                        )}
+                                        {selectedItem.association && (
+                                            <p className={`text-sm ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                                                <strong>Association:</strong>{' '}
+                                                {selectedItem.association}
+                                            </p>
+                                        )}
+                                    </div>
+                                )}
+
 
                                 {selectedItem.type === 'advertising' && (
                                     <div className="space-y-2 mt-4">
@@ -170,7 +209,7 @@ const PortfolioGallery: React.FC = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </>
     );
 };
 

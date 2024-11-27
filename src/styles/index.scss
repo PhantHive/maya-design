@@ -1,5 +1,5 @@
 // Import font with display swap for better performance
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 
 // Theme and layout variables
 :root {
@@ -12,18 +12,18 @@
     --z-background: 0;
     --z-content: 10;
     --z-nav: 20;
-    --z-modal: 30;
     --z-header: 40;
     --z-footer: 40;
+    --z-modal: 50;  // Increased to be above everything
 
     // Effects
-    --backdrop-blur: blur(8px);
+    --backdrop-blur: blur(7px);
     --transition-fast: 0.2s ease-out;
     --transition-medium: 0.3s ease-out;
 
     // Colors
     --primary-color: #00d9f6;
-    --secondary-color: #6366f1;
+    --secondary-color: #ffffff;
 
     // Dark theme
     --background-dark: #000108;

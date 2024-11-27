@@ -16,6 +16,10 @@ export interface LogoConstellation extends ProjectBase {
     type: 'logo';
     constellationSize: ConstellationPoint[];
     stars: ConstellationPoint[];
+    company?: string;
+    fictionalCompany?: string;
+    association?: string;
+
 }
 
 export interface UIProject extends ProjectBase {
@@ -23,6 +27,8 @@ export interface UIProject extends ProjectBase {
     technologies: string[];
     liveUrl?: string;
     relatedLogo?: string;
+    company?: string;
+    association?: string;
 }
 
 export interface AdvertisingProject extends ProjectBase {
@@ -52,6 +58,7 @@ export const portfolioData: PortfolioItem[] = [
             { x: 130, y: 270 },
         ],
         image: 'Phearion-logo.png',
+        company: 'Phearion'
     },
     {
         id: 1,
@@ -69,6 +76,7 @@ export const portfolioData: PortfolioItem[] = [
             { x: 220, y: 230 },
         ],
         image: 'Xonic-logo.png',
+        fictionalCompany: 'Xonic'
     },
     {
         id: 2,
@@ -96,7 +104,7 @@ export const portfolioData: PortfolioItem[] = [
         id: 3,
         name: 'Lumina',
         type: 'logo',
-        description: 'Elegant lighting brand logo for a video game.',
+        description: 'Elegant lighting brand logo for a fighter type video game.',
         constellationSize: [
             { x: 75, y: 10 },
             { x: 300, y: 300 },
@@ -113,6 +121,7 @@ export const portfolioData: PortfolioItem[] = [
             { x: 270, y: 220 },
         ],
         image: 'Lumina-logo.png',
+        company: 'Phearion'
     },
     {
         id: 4,
@@ -121,7 +130,8 @@ export const portfolioData: PortfolioItem[] = [
         description: 'Complete UI/UX design for an innovative student ressources platform.',
         technologies: ['Figma'],
         image: 'BigBrain-UI.png',
-        relatedLogo: 'BigBrain-logo.png'
+        relatedLogo: 'BigBrain-logo.png',
+        association: 'Scrypt, Paris',
     },
     {
         id: 5,
@@ -139,18 +149,10 @@ export const portfolioData: PortfolioItem[] = [
         description: 'Mockup of a fictional sports brand for a university project.',
         client: 'Ospor',
         campaignDate: '2023',
-        image: 'Ospor-Ad.png'
+        image: 'Ospor-Ad.png',
     }
 ];
 
 export const isLogoConstellation = (item: PortfolioItem): item is LogoConstellation => {
     return item.type === 'logo';
-};
-
-export const isUIProject = (item: PortfolioItem): item is UIProject => {
-    return item.type === 'ui';
-};
-
-export const isAdvertisingProject = (item: PortfolioItem): item is AdvertisingProject => {
-    return item.type === 'advertising';
 };

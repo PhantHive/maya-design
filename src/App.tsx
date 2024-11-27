@@ -1,7 +1,7 @@
 // App.tsx
 import React, { Suspense } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
-import { Background } from './components/Background';
+import { Background } from './components/Background/Background.tsx';
 import { Header } from './components/Header';
 import { Body } from './components/Body';
 import { Footer } from './components/Footer';

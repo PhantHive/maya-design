@@ -3,18 +3,15 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: var(--footer-height);
-    min-height: var(--footer-height);
-    max-height: var(--footer-height);
+    height: calc(var(--footer-height) + env(safe-area-inset-bottom, 0));
     z-index: var(--z-footer);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     overflow: hidden;
     box-sizing: border-box;
     transform: translateZ(0);
 
-    // Use pseudo-element for backdrop and effects
     &::before {
         content: '';
         position: absolute;
@@ -25,7 +22,6 @@
         transition: background-color 0.3s ease-out;
     }
 
-    // Separate element for glow effect
     &::after {
         content: '';
         position: absolute;
@@ -45,14 +41,16 @@
         width: 100%;
         max-width: 1200px;
         padding: 0 20px;
+        height: var(--footer-height);
         transform: translateZ(0);
+        padding-bottom: max(env(safe-area-inset-bottom, 0), 20px);
     }
 
     .social-icons {
         display: flex;
         justify-content: center;
         gap: 1rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: env(safe-area-inset-bottom, 10px);
 
         a {
             display: flex;
@@ -78,9 +76,9 @@
     .copyright {
         font-size: 0.9rem;
         transition: color 0.3s ease-out;
+        margin-bottom: env(safe-area-inset-bottom, 10px);
     }
 
-    // Theme specific styles with reduced transitions
     &[data-theme="dark"] {
         .social-icons a {
             color: rgba(255, 255, 255, 0.9);
@@ -112,15 +110,21 @@
     }
 }
 
-// Mobile optimization
 @media (max-width: 768px) {
     .cosmic-footer {
+        padding-bottom: env(safe-area-inset-bottom, 0);
+        height: calc(var(--footer-height) + env(safe-area-inset-bottom, 0) + 50px);
+
+        .footer-content {
+            padding-bottom: max(env(safe-area-inset-bottom, 0), 15px);
+        }
+
         .social-icons {
             gap: 0.75rem;
 
             a {
                 padding: 0.4rem;
-                // Disable hover effect on mobile to improve performance
+
                 &:hover {
                     transform: none;
                 }
@@ -132,9 +136,12 @@
             }
         }
 
-        // Reduce shadow intensity on mobile
         &::after {
             opacity: 0.5;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
         }
     }
 }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ThemeContext } from '../contexts/ThemeContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { StarField, CloudField } from './BackgroundElements';
 
 export const Background: React.FC = React.memo(() => {
     const { theme } = useContext(ThemeContext);
@@ -14,19 +15,7 @@ export const Background: React.FC = React.memo(() => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                {theme === 'dark' ? (
-                    <div className="star-field">
-                        {[...Array(7)].map((_, i) => (
-                            <div key={i} className="star" />
-                        ))}
-                    </div>
-                ) : (
-                    <div className="cloud-field">
-                        {[...Array(6)].map((_, i) => (
-                            <div key={i} className="cloud" />
-                        ))}
-                    </div>
-                )}
+                {theme === 'dark' ? <StarField /> : <CloudField />}
             </motion.div>
         </AnimatePresence>
     );
